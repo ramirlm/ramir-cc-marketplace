@@ -1,0 +1,62 @@
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Local configuration (contains credentials)
+*.local.md
+*/.claude/*.local.md
+
+# Testing
+coverage/
+.nyc_output/
+test-results/
+cypress/screenshots/
+cypress/videos/
+
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+out/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Cache
+.cache/
+*.cache
+
+# Personal credentials (DO NOT COMMIT)
+hooks/sounds/*.mp3
+**/credentials.json
+**/secrets.json

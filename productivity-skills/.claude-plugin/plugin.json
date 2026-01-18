@@ -1,0 +1,10 @@
+{
+  "name": "productivity-skills",
+  "version": "1.0.0",
+  "description": "Productivity enhancement skills for file organization, meeting analysis, and prompt optimization",
+  "author": {
+    "name": "Ramir Mesquita"
+  },
+  "keywords": ["productivity", "organization", "meetings", "prompts", "efficiency"],
+  "license": "MIT"
+}

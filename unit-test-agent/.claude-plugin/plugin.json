@@ -1,0 +1,10 @@
+{
+  "name": "unit-test-agent",
+  "version": "1.0.0",
+  "description": "Autonomous agent for unit test execution with Jest and Vitest support",
+  "author": {
+    "name": "Ramir Mesquita"
+  },
+  "keywords": ["testing", "unit-tests", "jest", "vitest", "automation", "agent"],
+  "license": "MIT"
+}

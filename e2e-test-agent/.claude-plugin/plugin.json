@@ -1,0 +1,10 @@
+{
+  "name": "e2e-test-agent",
+  "version": "1.0.0",
+  "description": "Autonomous agent for end-to-end test execution with Playwright and Cypress support",
+  "author": {
+    "name": "Ramir Mesquita"
+  },
+  "keywords": ["testing", "e2e", "playwright", "cypress", "automation", "agent"],
+  "license": "MIT"
+}

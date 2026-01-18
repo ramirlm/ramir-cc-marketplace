@@ -1,0 +1,10 @@
+{
+  "name": "coding-skills",
+  "version": "1.0.0",
+  "description": "Comprehensive coding skills bundle including guidelines, planning, review, and technical writing best practices",
+  "author": {
+    "name": "Ramir Mesquita"
+  },
+  "keywords": ["coding", "guidelines", "planning", "review", "writing", "best-practices"],
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "dev-commands",
+  "version": "1.0.0",
+  "description": "Development workflow commands for CLAUDE.md improvement, feature development, PR creation, and code review",
+  "author": {
+    "name": "Ramir Mesquita"
+  },
+  "keywords": ["development", "commands", "workflow", "claude-md", "review", "pr"],
+  "license": "MIT"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "personal-workspace-setup",
+  "version": "1.0.0",
+  "description": "Complete workspace setup with security hooks, notifications, and custom statusline for Claude Code",
+  "author": {
+    "name": "Ramir Mesquita",
+    "email": ""
+  },
+  "keywords": ["security", "notifications", "hooks", "statusline", "workspace"],
+  "license": "MIT"
+}
