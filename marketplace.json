@@ -1,84 +1,102 @@
 {
+  "name": "ramir-personal-marketplace",
   "owner": {
     "name": "Ramir Mesquita",
-    "email": "ramir@example.com",
-    "url": "https://github.com/ramirlm"
+    "email": "ramir@example.com"
   },
-  "name": "ramir-personal-marketplace",
-  "displayName": "Ramir's Personal Plugins",
-  "description": "Comprehensive collection of productivity, security, and testing plugins for Claude Code",
-  "repository": "https://github.com/ramirlm/ramir-cc-marketplace",
+  "metadata": {
+    "description": "Comprehensive collection of productivity, security, and testing plugins for Claude Code",
+    "version": "1.0.0"
+  },
   "plugins": [
     {
       "name": "personal-workspace-setup",
-      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "ramirlm/ramir-cc-marketplace",
+        "path": "personal-workspace-setup"
+      },
       "description": "Complete workspace setup with security hooks, notifications, and custom statusline for Claude Code",
+      "version": "1.0.0",
       "author": {
         "name": "Ramir Mesquita",
-        "email": "ramir@example.com",
-        "url": "https://github.com/ramirlm"
+        "email": "ramir@example.com"
       },
-      "source": "./personal-workspace-setup",
       "license": "MIT"
     },
     {
       "name": "coding-skills",
-      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "ramirlm/ramir-cc-marketplace",
+        "path": "coding-skills"
+      },
       "description": "Comprehensive coding skills including guidelines, planning, review, and technical writing best practices",
+      "version": "1.0.0",
       "author": {
         "name": "Ramir Mesquita",
-        "email": "ramir@example.com",
-        "url": "https://github.com/ramirlm"
+        "email": "ramir@example.com"
       },
-      "source": "./coding-skills",
       "license": "MIT"
     },
     {
       "name": "productivity-skills",
-      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "ramirlm/ramir-cc-marketplace",
+        "path": "productivity-skills"
+      },
       "description": "Productivity enhancement skills for file organization, meeting analysis, and prompt optimization",
+      "version": "1.0.0",
       "author": {
         "name": "Ramir Mesquita",
-        "email": "ramir@example.com",
-        "url": "https://github.com/ramirlm"
+        "email": "ramir@example.com"
       },
-      "source": "./productivity-skills",
       "license": "MIT"
     },
     {
       "name": "dev-commands",
-      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "ramirlm/ramir-cc-marketplace",
+        "path": "dev-commands"
+      },
       "description": "Development workflow commands for CLAUDE.md improvement, feature development, PR creation, and code review",
+      "version": "1.0.0",
       "author": {
         "name": "Ramir Mesquita",
-        "email": "ramir@example.com",
-        "url": "https://github.com/ramirlm"
+        "email": "ramir@example.com"
       },
-      "source": "./dev-commands",
       "license": "MIT"
     },
     {
       "name": "e2e-test-agent",
-      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "ramirlm/ramir-cc-marketplace",
+        "path": "e2e-test-agent"
+      },
       "description": "Autonomous agent for end-to-end test execution with Playwright and Cypress support",
+      "version": "1.0.0",
       "author": {
         "name": "Ramir Mesquita",
-        "email": "ramir@example.com",
-        "url": "https://github.com/ramirlm"
+        "email": "ramir@example.com"
       },
-      "source": "./e2e-test-agent",
       "license": "MIT"
     },
     {
       "name": "unit-test-agent",
-      "version": "1.0.0",
+      "source": {
+        "source": "github",
+        "repo": "ramirlm/ramir-cc-marketplace",
+        "path": "unit-test-agent"
+      },
       "description": "Autonomous agent for unit test execution with Jest and Vitest support",
+      "version": "1.0.0",
       "author": {
         "name": "Ramir Mesquita",
-        "email": "ramir@example.com",
-        "url": "https://github.com/ramirlm"
+        "email": "ramir@example.com"
       },
-      "source": "./unit-test-agent",
       "license": "MIT"
     }
   ]
