@@ -1,136 +1,85 @@
 {
+  "owner": {
+    "name": "Ramir Mesquita",
+    "email": "ramir@example.com",
+    "url": "https://github.com/ramirlm"
+  },
   "name": "ramir-personal-marketplace",
   "displayName": "Ramir's Personal Plugins",
   "description": "Comprehensive collection of productivity, security, and testing plugins for Claude Code",
-  "author": {
-    "name": "Ramir Mesquita",
-    "email": "",
-    "url": ""
-  },
   "repository": "https://github.com/ramirlm/ramir-cc-marketplace",
   "plugins": [
     {
-      "id": "personal-workspace-setup",
-      "name": "Personal Workspace Setup",
+      "name": "personal-workspace-setup",
       "version": "1.0.0",
       "description": "Complete workspace setup with security hooks, notifications, and custom statusline for Claude Code",
-      "author": "Ramir Mesquita",
-      "category": "productivity",
-      "tags": ["security", "notifications", "hooks", "statusline", "workspace"],
-      "repository": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/personal-workspace-setup",
-      "homepage": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/personal-workspace-setup",
-      "license": "MIT",
-      "keywords": ["security", "notifications", "hooks", "statusline", "workspace"],
-      "featured": true,
-      "icon": "🛡️",
-      "screenshots": [],
-      "requirements": {
-        "tools": ["jq", "curl"],
-        "optional": ["Slack Bot Token", "Pushover API Keys"]
-      }
+      "author": {
+        "name": "Ramir Mesquita",
+        "email": "ramir@example.com",
+        "url": "https://github.com/ramirlm"
+      },
+      "source": "./personal-workspace-setup",
+      "license": "MIT"
     },
     {
-      "id": "coding-skills",
-      "name": "Coding Skills Bundle",
+      "name": "coding-skills",
       "version": "1.0.0",
       "description": "Comprehensive coding skills including guidelines, planning, review, and technical writing best practices",
-      "author": "Ramir Mesquita",
-      "category": "development",
-      "tags": ["coding", "guidelines", "planning", "review", "writing", "best-practices"],
-      "repository": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/coding-skills",
-      "homepage": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/coding-skills",
-      "license": "MIT",
-      "keywords": ["coding", "guidelines", "planning", "review", "writing"],
-      "featured": true,
-      "icon": "💻",
-      "screenshots": []
+      "author": {
+        "name": "Ramir Mesquita",
+        "email": "ramir@example.com",
+        "url": "https://github.com/ramirlm"
+      },
+      "source": "./coding-skills",
+      "license": "MIT"
     },
     {
-      "id": "productivity-skills",
-      "name": "Productivity Skills Bundle",
+      "name": "productivity-skills",
       "version": "1.0.0",
       "description": "Productivity enhancement skills for file organization, meeting analysis, and prompt optimization",
-      "author": "Ramir Mesquita",
-      "category": "productivity",
-      "tags": ["productivity", "organization", "meetings", "prompts", "efficiency"],
-      "repository": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/productivity-skills",
-      "homepage": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/productivity-skills",
-      "license": "MIT",
-      "keywords": ["productivity", "organization", "meetings", "prompts"],
-      "icon": "🚀",
-      "screenshots": []
+      "author": {
+        "name": "Ramir Mesquita",
+        "email": "ramir@example.com",
+        "url": "https://github.com/ramirlm"
+      },
+      "source": "./productivity-skills",
+      "license": "MIT"
     },
     {
-      "id": "dev-commands",
-      "name": "Development Commands",
+      "name": "dev-commands",
       "version": "1.0.0",
       "description": "Development workflow commands for CLAUDE.md improvement, feature development, PR creation, and code review",
-      "author": "Ramir Mesquita",
-      "category": "development",
-      "tags": ["development", "commands", "workflow", "claude-md", "review", "pr"],
-      "repository": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/dev-commands",
-      "homepage": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/dev-commands",
-      "license": "MIT",
-      "keywords": ["development", "commands", "workflow"],
-      "icon": "⚡",
-      "screenshots": [],
-      "requirements": {
-        "tools": ["gh (GitHub CLI)"]
-      }
+      "author": {
+        "name": "Ramir Mesquita",
+        "email": "ramir@example.com",
+        "url": "https://github.com/ramirlm"
+      },
+      "source": "./dev-commands",
+      "license": "MIT"
     },
     {
-      "id": "e2e-test-agent",
-      "name": "E2E Test Agent",
+      "name": "e2e-test-agent",
       "version": "1.0.0",
       "description": "Autonomous agent for end-to-end test execution with Playwright and Cypress support",
-      "author": "Ramir Mesquita",
-      "category": "testing",
-      "tags": ["testing", "e2e", "playwright", "cypress", "automation", "agent"],
-      "repository": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/e2e-test-agent",
-      "homepage": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/e2e-test-agent",
-      "license": "MIT",
-      "keywords": ["testing", "e2e", "playwright", "cypress"],
-      "featured": true,
-      "icon": "🤖",
-      "screenshots": [],
-      "requirements": {
-        "tools": ["Node.js"],
-        "optional": ["Playwright or Cypress"]
-      }
+      "author": {
+        "name": "Ramir Mesquita",
+        "email": "ramir@example.com",
+        "url": "https://github.com/ramirlm"
+      },
+      "source": "./e2e-test-agent",
+      "license": "MIT"
     },
     {
-      "id": "unit-test-agent",
-      "name": "Unit Test Agent",
+      "name": "unit-test-agent",
       "version": "1.0.0",
       "description": "Autonomous agent for unit test execution with Jest and Vitest support",
-      "author": "Ramir Mesquita",
-      "category": "testing",
-      "tags": ["testing", "unit-tests", "jest", "vitest", "automation", "agent"],
-      "repository": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/unit-test-agent",
-      "homepage": "https://github.com/ramirlm/ramir-cc-marketplace/tree/main/unit-test-agent",
-      "license": "MIT",
-      "keywords": ["testing", "unit-tests", "jest", "vitest"],
-      "featured": true,
-      "icon": "🧪",
-      "screenshots": [],
-      "requirements": {
-        "tools": ["Node.js"],
-        "optional": ["Jest or Vitest"]
-      }
+      "author": {
+        "name": "Ramir Mesquita",
+        "email": "ramir@example.com",
+        "url": "https://github.com/ramirlm"
+      },
+      "source": "./unit-test-agent",
+      "license": "MIT"
     }
-  ],
-  "categories": {
-    "productivity": {
-      "name": "Productivity",
-      "description": "Tools to enhance your productivity and workflow"
-    },
-    "development": {
-      "name": "Development",
-      "description": "Development tools and workflows"
-    },
-    "testing": {
-      "name": "Testing",
-      "description": "Automated testing and quality assurance"
-    }
-  }
+  ]
 }
