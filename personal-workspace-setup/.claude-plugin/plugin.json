@@ -7,5 +7,12 @@
     "email": ""
   },
   "keywords": ["security", "notifications", "hooks", "statusline", "workspace"],
-  "license": "MIT"
+  "license": "MIT",
+  "hooks": {
+    "configFile": "hooks/hooks.json"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "${CLAUDE_PLUGIN_ROOT}/statusline.sh"
+  }
 }
