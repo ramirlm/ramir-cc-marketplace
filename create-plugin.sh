@@ -13,6 +13,7 @@ NC='\033[0m' # No Color
 
 # Default values
 DEFAULT_AUTHOR="ramirlm"
+DEFAULT_EMAIL="ramir@example.com"
 DEFAULT_LICENSE="MIT"
 DEFAULT_VERSION="1.0.0"
 
@@ -56,6 +57,7 @@ OPTIONS:
     --dependencies DEPS   Comma-separated dependencies
     --license LICENSE     License: MIT | Apache-2.0 | GPL-3.0 (default: MIT)
     --author AUTHOR       Author name (default: ramirlm)
+    --email EMAIL         Author email (default: ramir@example.com)
     --template TEMPLATE   Template type: blank | agent | skill | command | test-agent
     --help                Show this help message
 
@@ -155,6 +157,7 @@ PLUGIN_DESCRIPTION=""
 PLUGIN_DEPENDENCIES=""
 PLUGIN_LICENSE="$DEFAULT_LICENSE"
 PLUGIN_AUTHOR="$DEFAULT_AUTHOR"
+PLUGIN_EMAIL="$DEFAULT_EMAIL"
 PLUGIN_TEMPLATE="blank"
 
 while [[ $# -gt 0 ]]; do
@@ -191,6 +194,11 @@ while [[ $# -gt 0 ]]; do
             ;;
         --author)
             PLUGIN_AUTHOR="$2"
+            INTERACTIVE=false
+            shift 2
+            ;;
+        --email)
+            PLUGIN_EMAIL="$2"
             INTERACTIVE=false
             shift 2
             ;;
@@ -287,6 +295,11 @@ if [ "$INTERACTIVE" = true ]; then
     read -p "Author name (default: $DEFAULT_AUTHOR): " author_input
     PLUGIN_AUTHOR="${author_input:-$DEFAULT_AUTHOR}"
     
+    # Get email
+    echo ""
+    read -p "Author email (default: $DEFAULT_EMAIL): " email_input
+    PLUGIN_EMAIL="${email_input:-$DEFAULT_EMAIL}"
+    
     # Get template
     echo ""
     echo "Templates:"
@@ -335,6 +348,7 @@ echo "  Description:  $PLUGIN_DESCRIPTION"
 echo "  Dependencies: ${PLUGIN_DEPENDENCIES:-none}"
 echo "  License:      $PLUGIN_LICENSE"
 echo "  Author:       $PLUGIN_AUTHOR"
+echo "  Email:        $PLUGIN_EMAIL"
 echo "  Template:     $PLUGIN_TEMPLATE"
 echo ""
 
@@ -823,7 +837,7 @@ else
       "version": "$DEFAULT_VERSION",
       "author": {
         "name": "$PLUGIN_AUTHOR",
-        "email": "ramir@example.com"
+        "email": "$PLUGIN_EMAIL"
       },
       "license": "$PLUGIN_LICENSE"
     }
@@ -854,7 +868,7 @@ try:
         "version": "$DEFAULT_VERSION",
         "author": {
             "name": "$PLUGIN_AUTHOR",
-            "email": "ramir@example.com"
+            "email": "$PLUGIN_EMAIL"
         },
         "license": "$PLUGIN_LICENSE"
     }
