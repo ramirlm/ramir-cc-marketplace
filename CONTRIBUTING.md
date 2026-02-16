@@ -26,11 +26,57 @@ Thank you for your interest in contributing to this plugin collection!
 
 1. Fork the repository
 2. Create a new branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
+3. Make your changes (use `./create-plugin.sh` for new plugins)
 4. Test thoroughly
 5. Commit your changes (`git commit -m 'Add amazing feature'`)
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
+
+## 🚀 Quick Start: Creating a New Plugin
+
+**Use the Plugin Generator** (recommended):
+
+```bash
+# Interactive mode - walks you through all options
+./create-plugin.sh
+
+# Non-interactive mode - faster for experienced users
+./create-plugin.sh --name "my-plugin" --type agent --category automation --description "My plugin description"
+```
+
+**Available Options:**
+```bash
+--name NAME           Plugin name (e.g., "git-workflow-agent")
+--type TYPE           Plugin type: agent | skill | dev-command
+--category CATEGORY   Category: coding | productivity | testing | security | automation
+--description DESC    Short description
+--dependencies DEPS   Comma-separated dependencies
+--license LICENSE     License: MIT | Apache-2.0 | GPL-3.0 (default: MIT)
+--author AUTHOR       Author name (default: ramirlm)
+```
+
+**Examples:**
+```bash
+# Create a testing agent
+./create-plugin.sh --name "api-test-agent" --type agent --category testing
+
+# Create a code review skill
+./create-plugin.sh --name "code-review-skill" --type skill --category coding
+
+# Create a refactoring command
+./create-plugin.sh --name "refactor-command" --type dev-command --category coding
+```
+
+**What the Generator Creates:**
+- ✅ Proper directory structure
+- ✅ `plugin.json` with metadata
+- ✅ README.md template with examples
+- ✅ CHANGELOG.md
+- ✅ Type-specific templates (agents/, skills/, or commands/)
+- ✅ Automatic marketplace.json update
+- ✅ Example files
+
+For manual setup instructions, see the detailed sections below.
 
 ## 📝 Code Standards
 
@@ -135,6 +181,15 @@ Before submitting:
 
 ## 📋 Checklist for New Plugins
 
+**If using `./create-plugin.sh` (recommended):**
+- [ ] Run the generator: `./create-plugin.sh`
+- [ ] Customize generated templates in the plugin directory
+- [ ] Add your implementation
+- [ ] Test the plugin
+- [ ] Update examples with real usage
+- [ ] Verify marketplace.json was updated correctly
+
+**Manual setup checklist:**
 - [ ] Created `.claude-plugin/plugin.json` with required fields
 - [ ] Written comprehensive README.md
 - [ ] All scripts are executable (`chmod +x`)

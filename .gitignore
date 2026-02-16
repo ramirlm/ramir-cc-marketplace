@@ -60,3 +60,6 @@ temp/
 hooks/sounds/*.mp3
 **/credentials.json
 **/secrets.json
+
+# Backup files
+*.backup
