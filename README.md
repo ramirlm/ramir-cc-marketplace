@@ -331,11 +331,64 @@ Ramir Mesquita
 
 ## 🤝 Contributing
 
+### Creating New Plugins
+
+Use the plugin template generator to quickly scaffold new plugins:
+
+```bash
+# Interactive mode - prompts for all details
+./create-plugin.sh
+
+# Non-interactive mode - specify all parameters
+./create-plugin.sh --name "my-agent" --type agent --category automation --description "My autonomous agent"
+```
+
+**Plugin Types:**
+- `agent` - Autonomous agents
+- `skill` - Step-by-step skills
+- `dev-command` - Development commands
+
+**Categories:**
+- `coding` - Code development
+- `productivity` - Productivity tools
+- `testing` - Testing frameworks
+- `security` - Security tools
+- `automation` - Automation workflows
+
+**Generated Structure:**
+The generator creates:
+- Plugin directory with proper structure
+- `plugin.json` with metadata
+- README.md with examples
+- CHANGELOG.md
+- Type-specific templates (agents/, skills/, or commands/)
+- Automatic marketplace.json update
+
+**Example Usage:**
+```bash
+# Create a testing agent
+./create-plugin.sh --name "api-test-agent" --type agent --category testing
+
+# Create a code review skill
+./create-plugin.sh --name "code-review-skill" --type skill --category coding
+
+# Create a refactoring command
+./create-plugin.sh --name "refactor-command" --type dev-command --category coding
+```
+
+For more details, run:
+```bash
+./create-plugin.sh --help
+```
+
+### Contributing Guidelines
+
 To contribute or report issues:
-1. Test plugins thoroughly
-2. Follow existing patterns
-3. Document changes
-4. Update READMEs
+1. Use the plugin generator for new plugins
+2. Test plugins thoroughly
+3. Follow existing patterns
+4. Document changes
+5. Update READMEs
 
 ## 🚦 Roadmap
 
