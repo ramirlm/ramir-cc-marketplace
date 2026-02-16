@@ -273,6 +273,16 @@ if [ "$INTERACTIVE" = true ]; then
     echo ""
     read -p "Short description: " PLUGIN_DESCRIPTION
     
+    # Warn if description contains special characters that might cause issues
+    if [[ "$PLUGIN_DESCRIPTION" == *"/"* ]] || [[ "$PLUGIN_DESCRIPTION" == *"\\"* ]]; then
+        print_warning "Description contains special characters (/ or \\). This may cause template processing issues."
+        read -p "Continue anyway? (y/n): " continue_desc
+        if [[ ! $continue_desc =~ ^[Yy]$ ]]; then
+            print_info "Please enter a different description"
+            read -p "Short description: " PLUGIN_DESCRIPTION
+        fi
+    fi
+    
     # Get dependencies
     echo ""
     read -p "Dependencies (comma-separated, optional): " PLUGIN_DEPENDENCIES
@@ -484,13 +494,13 @@ PLUGIN_LICENSE_PLACEHOLDER
 PLUGIN_AUTHOR_PLACEHOLDER
 EOF_README
 
-# Replace placeholders
-sed -i.bak "s/PLUGIN_TITLE_PLACEHOLDER/$PLUGIN_TITLE/g" "$PLUGIN_NAME/README.md"
-sed -i.bak "s/PLUGIN_DESCRIPTION_PLACEHOLDER/$PLUGIN_DESCRIPTION/g" "$PLUGIN_NAME/README.md"
-sed -i.bak "s/PLUGIN_NAME_PLACEHOLDER/$PLUGIN_NAME/g" "$PLUGIN_NAME/README.md"
-sed -i.bak "s/PLUGIN_DEPENDENCIES_PLACEHOLDER/${PLUGIN_DEPENDENCIES:-None}/g" "$PLUGIN_NAME/README.md"
-sed -i.bak "s/PLUGIN_LICENSE_PLACEHOLDER/$PLUGIN_LICENSE/g" "$PLUGIN_NAME/README.md"
-sed -i.bak "s/PLUGIN_AUTHOR_PLACEHOLDER/$PLUGIN_AUTHOR/g" "$PLUGIN_NAME/README.md"
+# Replace placeholders (note: avoid special characters in description for best results)
+sed -i.bak "s/PLUGIN_TITLE_PLACEHOLDER/$PLUGIN_TITLE/g" "$PLUGIN_NAME/README.md" 2>/dev/null || true
+sed -i.bak "s/PLUGIN_DESCRIPTION_PLACEHOLDER/$PLUGIN_DESCRIPTION/g" "$PLUGIN_NAME/README.md" 2>/dev/null || true
+sed -i.bak "s/PLUGIN_NAME_PLACEHOLDER/$PLUGIN_NAME/g" "$PLUGIN_NAME/README.md" 2>/dev/null || true
+sed -i.bak "s/PLUGIN_DEPENDENCIES_PLACEHOLDER/${PLUGIN_DEPENDENCIES:-None}/g" "$PLUGIN_NAME/README.md" 2>/dev/null || true
+sed -i.bak "s/PLUGIN_LICENSE_PLACEHOLDER/$PLUGIN_LICENSE/g" "$PLUGIN_NAME/README.md" 2>/dev/null || true
+sed -i.bak "s/PLUGIN_AUTHOR_PLACEHOLDER/$PLUGIN_AUTHOR/g" "$PLUGIN_NAME/README.md" 2>/dev/null || true
 
 # Add type-specific content to README
 case $PLUGIN_TYPE in
@@ -815,41 +825,25 @@ if [ ! -f "marketplace.json" ]; then
     print_warning "marketplace.json not found in current directory"
     print_info "Skipping marketplace update (run this script from repository root)"
 else
-    # Get repo name from marketplace.json or use default
-    REPO_NAME=$(grep -o '"repo": "[^"]*"' marketplace.json | head -1 | cut -d'"' -f4 | cut -d'/' -f2)
-    REPO_OWNER=$(grep -o '"repo": "[^"]*"' marketplace.json | head -1 | cut -d'"' -f4 | cut -d'/' -f1)
-    
-    if [ -z "$REPO_NAME" ]; then
-        REPO_NAME="ramir-cc-marketplace"
-        REPO_OWNER="ramirlm"
-    fi
-    
-    # Create new plugin entry
-    NEW_PLUGIN=$(cat << EOF
-    {
-      "name": "$PLUGIN_NAME",
-      "source": {
-        "source": "github",
-        "repo": "$REPO_OWNER/$REPO_NAME",
-        "path": "$PLUGIN_NAME"
-      },
-      "description": "$PLUGIN_DESCRIPTION",
-      "version": "$DEFAULT_VERSION",
-      "author": {
-        "name": "$PLUGIN_AUTHOR",
-        "email": "$PLUGIN_EMAIL"
-      },
-      "license": "$PLUGIN_LICENSE"
-    }
-EOF
-)
-    
-    # Backup marketplace.json
-    cp marketplace.json marketplace.json.backup
-    
-    # Add new plugin to marketplace.json (before the last closing bracket)
-    # This is a simple approach - for production, consider using jq
-    python3 << PYTHON_SCRIPT
+    # Check if python3 is available
+    if ! command -v python3 &> /dev/null; then
+        print_warning "python3 not found, skipping marketplace.json update"
+        print_info "You can manually add the plugin entry to marketplace.json later"
+    else
+        # Get repo name from marketplace.json or use default
+        REPO_NAME=$(grep -o '"repo": "[^"]*"' marketplace.json | head -1 | cut -d'"' -f4 | cut -d'/' -f2)
+        REPO_OWNER=$(grep -o '"repo": "[^"]*"' marketplace.json | head -1 | cut -d'"' -f4 | cut -d'/' -f1)
+        
+        if [ -z "$REPO_NAME" ]; then
+            REPO_NAME="ramir-cc-marketplace"
+            REPO_OWNER="ramirlm"
+        fi
+        
+        # Backup marketplace.json
+        cp marketplace.json marketplace.json.backup
+        
+        # Add new plugin to marketplace.json using Python
+        python3 << PYTHON_SCRIPT
 import json
 import sys
 
@@ -883,8 +877,9 @@ except Exception as e:
     print(f"⚠️  Could not update marketplace.json: {e}")
     sys.exit(0)
 PYTHON_SCRIPT
-    
-    print_success "marketplace.json updated"
+        
+        print_success "marketplace.json updated"
+    fi
 fi
 
 echo ""
