@@ -1,16 +1,26 @@
 #!/bin/bash
 # Pushover notification hook for Claude Code
-# Sends high-priority notification with context when Claude stops
+# Sends notification with context when Claude stops
 
-# Credentials - Set these environment variables in your shell profile or .env file
-# export PUSHOVER_USER_KEY="your-user-key-here"
-# export PUSHOVER_APP_TOKEN="your-app-token-here"
-export PUSHOVER_USER_KEY="${PUSHOVER_USER_KEY:-}"
-export PUSHOVER_APP_TOKEN="${PUSHOVER_APP_TOKEN:-}"
+LOG="$HOME/.claude/hook_notify.log"
+echo "[$(date)] Stop hook fired. PUSHOVER_USER_KEY=${PUSHOVER_USER_KEY:+SET}${PUSHOVER_USER_KEY:-UNSET}" >> "$LOG"
+
+# Credentials - load from shell profiles if not already in environment
+if [[ -z "$PUSHOVER_USER_KEY" ]] || [[ -z "$PUSHOVER_APP_TOKEN" ]]; then
+  for profile in "$HOME/.zprofile" "$HOME/.zshenv" "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile"; do
+    if [[ -f "$profile" ]]; then
+      while IFS= read -r line || [[ -n "$line" ]]; do
+        if [[ "$line" =~ ^export\ PUSHOVER_ ]]; then
+          eval "$line" 2>/dev/null || true
+        fi
+      done < "$profile"
+    fi
+  done
+fi
 
 # Check if credentials are set
 if [[ -z "$PUSHOVER_USER_KEY" ]] || [[ -z "$PUSHOVER_APP_TOKEN" ]]; then
-  # Silently exit if credentials not configured
+  echo "[$(date)] Pushover credentials not configured, skipping." >> "$LOG"
   exit 0
 fi
 
@@ -48,48 +58,37 @@ fi
 
 # Extract session_id from hook context
 session_id=$(echo "$input" | jq -r '.session_id // "unknown"' 2>/dev/null || echo "unknown")
-# Use short ID (first 8 chars) for display
 short_session_id="${session_id:0:8}"
 
 # Build title based on stop reason with conversation name and session ID
-base_title=""
 case "$stop_reason" in
-    "session_end")
-        base_title="Sessão Finalizada"
-        ;;
-    "max_turns_reached")
-        base_title="Limite de Turnos"
-        ;;
-    "interrupt")
-        base_title="Interrompido"
-        ;;
-    *)
-        base_title="Tarefa Completa"
-        ;;
+    "session_end")       base_title="Sessão Finalizada" ;;
+    "max_turns_reached") base_title="Limite de Turnos" ;;
+    "interrupt")         base_title="Interrompido" ;;
+    *)                   base_title="Tarefa Completa" ;;
 esac
 
-# Build title with conversation name and session ID
 if [[ -n "$conversation_name" ]]; then
     title="Claude: ${base_title} - ${conversation_name} (${short_session_id})"
 else
     title="Claude: ${base_title} (${short_session_id})"
 fi
 
-# Build message with context (ensure not empty)
 if [[ -z "$last_message" ]]; then
     last_message="Sem detalhes disponíveis"
 fi
 
 message="${project_name}: ${last_message:0:350}"
 
-# Send notification via Pushover
-curl -s \
+result=$(curl -s \
     --form-string "token=${PUSHOVER_APP_TOKEN}" \
     --form-string "user=${PUSHOVER_USER_KEY}" \
     --form-string "title=${title}" \
     --form-string "message=${message}" \
     --form-string "priority=0" \
     --form-string "sound=pushover" \
-    "https://api.pushover.net/1/messages.json" > /dev/null 2>&1 || true
+    "https://api.pushover.net/1/messages.json" 2>&1 || true)
+
+echo "[$(date)] Pushover API result: $result" >> "$LOG"
 
 exit 0

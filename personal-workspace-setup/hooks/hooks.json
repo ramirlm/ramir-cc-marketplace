@@ -51,6 +51,11 @@
       "hooks": [
         {
           "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-notify-question.sh",
+          "timeout": 30
+        },
+        {
+          "type": "command",
           "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/slack-interactive.sh",
           "timeout": 300
         }
