@@ -30,8 +30,10 @@ if [[ -n "$transcript_path" ]] && [[ -f "$transcript_path" ]]; then
     # Get conversation name from custom-title entry
     conversation_name=$(grep '"type":"custom-title"' "$transcript_path" 2>/dev/null | tail -1 | jq -r '.customTitle // empty' 2>/dev/null || echo "")
 
-    # Use tail -r for macOS (reverse lines), get last assistant message
-    last_message=$(tail -r "$transcript_path" 2>/dev/null | while IFS= read -r line; do
+    # Reverse lines cross-platform: tac (Linux) or tail -r (macOS)
+    _reverse_cmd="tac"
+    command -v tac &>/dev/null || _reverse_cmd="tail -r"
+    last_message=$($_reverse_cmd "$transcript_path" 2>/dev/null | while IFS= read -r line; do
         msg_type=$(echo "$line" | jq -r '.type // empty' 2>/dev/null)
         if [[ "$msg_type" == "assistant" ]]; then
             echo "$line" | jq -r '
