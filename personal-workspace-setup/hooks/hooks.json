@@ -1,85 +1,85 @@
 {
-  "SessionStart": [
-    {
-      "matcher": "",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/setup-statusline.sh",
-          "timeout": 10
-        }
-      ]
-    }
-  ],
-  "Notification": [
-    {
-      "matcher": "",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "afplay ${CLAUDE_PLUGIN_ROOT}/hooks/sounds/notification.mp3",
-          "timeout": 5
-        }
-      ]
-    }
-  ],
-  "Stop": [
-    {
-      "matcher": "",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-notify.sh",
-          "timeout": 30
-        }
-      ]
-    }
-  ],
-  "PreToolUse": [
-    {
-      "matcher": "mcp__*",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "echo 'MCP tools are disabled by default. Use @context7 or @MCP_DOCKER to enable.' && exit 1",
-          "timeout": 5
-        }
-      ]
-    },
-    {
-      "matcher": "AskUserQuestion",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/slack-interactive.sh",
-          "timeout": 300
-        }
-      ]
-    },
-    {
-      "matcher": "Bash",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-rm-commands.sh",
-          "timeout": 5
-        },
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-aws-mutations.sh",
-          "timeout": 5
-        }
-      ]
-    },
-    {
-      "matcher": "Read",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-env-reads.sh",
-          "timeout": 5
-        }
-      ]
-    }
-  ]
+  "description": "Security hooks for personal workspace: blocks dangerous commands, configures statusLine on first start, and sends Pushover notifications",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/setup-statusline.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay ${CLAUDE_PLUGIN_ROOT}/hooks/sounds/notification.mp3",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-notify.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'MCP tools are disabled by default. Use @context7 or @MCP_DOCKER to enable.' && exit 1",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/slack-interactive.sh",
+            "timeout": 300
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-rm-commands.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-aws-mutations.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/block-env-reads.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
 }
