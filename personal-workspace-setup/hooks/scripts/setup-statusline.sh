@@ -15,9 +15,11 @@ fi
 current=$(jq -r '.statusLine.command // empty' "$SETTINGS" 2>/dev/null || true)
 
 if [[ -z "$current" ]]; then
+    tmp=$(mktemp)
     jq --arg cmd "$STATUSLINE_CMD" \
         '.statusLine = {"type": "command", "command": $cmd}' \
-        "$SETTINGS" > "${SETTINGS}.tmp" && mv "${SETTINGS}.tmp" "$SETTINGS"
+        "$SETTINGS" > "$tmp"
+    mv "$tmp" "$SETTINGS"
 fi
 
 exit 0

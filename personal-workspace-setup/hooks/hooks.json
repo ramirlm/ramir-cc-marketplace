@@ -17,7 +17,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "afplay ${CLAUDE_PLUGIN_ROOT}/hooks/sounds/notification.mp3",
+          "command": "afplay /System/Library/Sounds/Glass.aiff",
           "timeout": 5
         }
       ]
