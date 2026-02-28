@@ -289,10 +289,10 @@ cc    # Start new session
 
 ```bash
 # Check hook scripts are executable
-ls -la ~/.claude/plugins/personal-workspace-setup/hooks/scripts/
+ls -la ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/
 
 # Make executable if needed
-chmod +x ~/.claude/plugins/personal-workspace-setup/hooks/scripts/*.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/*.sh
 ```
 
 ### Environment Variables Not Set

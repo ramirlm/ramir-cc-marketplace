@@ -316,8 +316,8 @@ cc
 ### Hooks Not Working
 ```bash
 # Make scripts executable
-chmod +x ~/.claude/plugins/personal-workspace-setup/hooks/scripts/*.sh
-chmod +x ~/.claude/plugins/personal-workspace-setup/statusline.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/*.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/statusline.sh
 ```
 
 ### Environment Variables

@@ -70,7 +70,7 @@ gh auth login
 cc --list-plugins
 
 # Verify hook scripts are executable
-ls -la ~/.claude/plugins/personal-workspace-setup/hooks/scripts/
+ls -la ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/
 
 # Should show -rwx--x--x (executable)
 ```
@@ -87,8 +87,8 @@ cc --enable-plugin personal-workspace-setup
 
 # Configure environment variables (see above)
 # Make scripts executable
-chmod +x ~/.claude/plugins/personal-workspace-setup/hooks/scripts/*.sh
-chmod +x ~/.claude/plugins/personal-workspace-setup/statusline.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/*.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/statusline.sh
 ```
 
 ### coding-skills
@@ -200,11 +200,11 @@ cc
 
 ```bash
 # Make scripts executable
-chmod +x ~/.claude/plugins/personal-workspace-setup/hooks/scripts/*.sh
-chmod +x ~/.claude/plugins/personal-workspace-setup/statusline.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/*.sh
+chmod +x ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/statusline.sh
 
 # Verify
-ls -la ~/.claude/plugins/personal-workspace-setup/hooks/scripts/
+ls -la ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup/hooks/scripts/
 # Should show -rwx--x--x
 ```
 
@@ -274,7 +274,7 @@ cc --disable-plugin e2e-test-agent
 cc --disable-plugin unit-test-agent
 
 # Remove plugin files
-rm -rf ~/.claude/plugins/personal-workspace-setup
+rm -rf ~/.claude/plugins/marketplaces/ramir-personal-marketplace/personal-workspace-setup
 rm -rf ~/.claude/plugins/coding-skills
 rm -rf ~/.claude/plugins/productivity-skills
 rm -rf ~/.claude/plugins/dev-commands
