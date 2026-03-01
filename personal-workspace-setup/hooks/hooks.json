@@ -22,7 +22,7 @@
         },
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-send.sh notification",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/notify-send.sh notification",
           "timeout": 15
         }
       ]
@@ -34,7 +34,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-send.sh stop",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/notify-send.sh stop",
           "timeout": 30
         }
       ]
@@ -46,7 +46,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-send.sh question",
+          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/notify-send.sh question",
           "timeout": 15
         },
         {
