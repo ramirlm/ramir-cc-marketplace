@@ -1,13 +1,14 @@
 #!/bin/bash
 # Pushover notification for AskUserQuestion hook
 # Fires as PreToolUse when Claude needs user input
+# Cross-platform (macOS + Linux)
 
 LOG="$HOME/.claude/hook_notify.log"
 echo "[$(date)] AskUserQuestion hook fired. PUSHOVER_USER_KEY=${PUSHOVER_USER_KEY:+SET}${PUSHOVER_USER_KEY:-UNSET}" >> "$LOG"
 
 # Credentials - load from shell profiles if not already in environment
 if [[ -z "$PUSHOVER_USER_KEY" ]] || [[ -z "$PUSHOVER_APP_TOKEN" ]]; then
-  for profile in "$HOME/.zprofile" "$HOME/.zshenv" "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile"; do
+  for profile in "$HOME/.local.zsh" "$HOME/.zprofile" "$HOME/.zshenv" "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.bash_profile"; do
     if [[ -f "$profile" ]]; then
       while IFS= read -r line || [[ -n "$line" ]]; do
         if [[ "$line" =~ ^export\ PUSHOVER_ ]]; then
@@ -28,13 +29,13 @@ input=$(cat)
 
 # Extract question and context
 tool_input=$(echo "$input" | jq -r '.tool_input // {}' 2>/dev/null)
-question=$(echo "$tool_input" | jq -r '.questions[0].question // "Sua resposta é necessária"' 2>/dev/null)
+question=$(echo "$tool_input" | jq -r '.questions[0].question // "Your response is needed"' 2>/dev/null)
 cwd=$(echo "$input" | jq -r '.cwd // ""' 2>/dev/null)
 project_name=$(basename "$cwd" 2>/dev/null || echo "Claude")
 session_id=$(echo "$input" | jq -r '.session_id // ""' 2>/dev/null)
 short_id="${session_id:0:8}"
 
-title="Claude aguarda resposta: ${project_name} (${short_id})"
+title="Claude needs attention: ${project_name} (${short_id})"
 message="${question:0:500}"
 
 result=$(curl -s \

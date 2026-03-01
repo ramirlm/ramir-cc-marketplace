@@ -17,7 +17,7 @@
       "hooks": [
         {
           "type": "command",
-          "command": "afplay /System/Library/Sounds/Glass.aiff",
+          "command": "if [ \"$(uname)\" = \"Darwin\" ]; then afplay /System/Library/Sounds/Glass.aiff 2>/dev/null; else paplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga 2>/dev/null || aplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga 2>/dev/null; fi || true",
           "timeout": 5
         }
       ]
@@ -37,22 +37,12 @@
   ],
   "PreToolUse": [
     {
-      "matcher": "mcp__*",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "echo 'MCP tools are disabled by default. Use @context7 or @MCP_DOCKER to enable.' && exit 1",
-          "timeout": 5
-        }
-      ]
-    },
-    {
       "matcher": "AskUserQuestion",
       "hooks": [
         {
           "type": "command",
           "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/pushover-notify-question.sh",
-          "timeout": 30
+          "timeout": 15
         },
         {
           "type": "command",

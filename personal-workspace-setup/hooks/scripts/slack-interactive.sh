@@ -211,28 +211,47 @@ while true; do
                 -H "Content-Type: application/json; charset=utf-8" \
                 -d "{\"channel\":\"${channel}\",\"thread_ts\":\"${thread_ts}\",\"text\":\"✅ Enviando resposta...\"}" > /dev/null
 
-            # Use AppleScript to type the response into the terminal
-            osascript -e "
-                tell application \"System Events\"
-                    delay 0.3
-                    keystroke \"${user_reply//\"/\\\"}\"
-                    delay 0.1
-                    keystroke return
-                end tell
-            " 2>/dev/null && {
-                log "Response injected via AppleScript"
+            # Cross-platform: type the response into the terminal
+            inject_success=false
+            if [[ "$(uname)" == "Darwin" ]]; then
+                # macOS: use AppleScript
+                osascript -e "
+                    tell application \"System Events\"
+                        delay 0.3
+                        keystroke \"${user_reply//\"/\\\"}\"
+                        delay 0.1
+                        keystroke return
+                    end tell
+                " 2>/dev/null && inject_success=true
+            else
+                # Linux: use xdotool
+                if command -v xdotool &>/dev/null; then
+                    sleep 0.3
+                    xdotool type --delay 10 "$user_reply" 2>/dev/null && \
+                    xdotool key Return 2>/dev/null && inject_success=true
+                fi
+            fi
+
+            if $inject_success; then
+                log "Response injected"
                 curl -s -X POST "https://slack.com/api/chat.postMessage" \
                     -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
                     -H "Content-Type: application/json; charset=utf-8" \
-                    -d "{\"channel\":\"${channel}\",\"thread_ts\":\"${thread_ts}\",\"text\":\"✅ Resposta enviada!\"}" > /dev/null
-            } || {
-                log "AppleScript failed, copying to clipboard"
-                echo "$user_reply" | pbcopy
+                    -d "{\"channel\":\"${channel}\",\"thread_ts\":\"${thread_ts}\",\"text\":\"✅ Response sent!\"}" > /dev/null
+            else
+                # Fallback: copy to clipboard
+                if [[ "$(uname)" == "Darwin" ]]; then
+                    echo "$user_reply" | pbcopy
+                else
+                    echo "$user_reply" | xclip -selection clipboard 2>/dev/null || \
+                    echo "$user_reply" | xsel --clipboard 2>/dev/null || true
+                fi
+                log "Injection failed, copied to clipboard"
                 curl -s -X POST "https://slack.com/api/chat.postMessage" \
                     -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
                     -H "Content-Type: application/json; charset=utf-8" \
-                    -d "{\"channel\":\"${channel}\",\"thread_ts\":\"${thread_ts}\",\"text\":\"⚠️ AppleScript falhou. Resposta copiada (Cmd+V).\"}" > /dev/null
-            }
+                    -d "{\"channel\":\"${channel}\",\"thread_ts\":\"${thread_ts}\",\"text\":\"⚠️ Auto-type failed. Response copied to clipboard (Ctrl+V / Cmd+V).\"}" > /dev/null
+            fi
 
             exit 0
         fi
